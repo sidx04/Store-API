@@ -2,6 +2,8 @@ const express=require('express')
 const app=express()
 require('dotenv').config()
 
+const connectDB=require('./db/connect')
+
 const notFoundMiddleware=require('./middleware/not-found')
 const errorHandlerMiddleware=require('./middleware/error-handler')
 
