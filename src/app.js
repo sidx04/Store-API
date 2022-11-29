@@ -1,9 +1,32 @@
 const express=require('express')
 const app=express()
+require('dotenv').config()
 
+const notFoundMiddleware=require('./middleware/not-found')
+const errorHandlerMiddleware=require('./middleware/error-handler')
+
+//routes
+app.get('/',(req,res)=>{
+    res.send(`<h1>Store API</h1><a href="/api/v1/products">Products route</a>`)
+})
+
+//products route
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
 
 //port config goes here
 const port=process.env.PORT || 3000
-app.listen(port,()=>{
-    console.log(`Server is listening on port ${port}...`);
-})
+
+const start=async()=>{
+    try {
+        //connect DB
+        app.listen(port,()=>{
+            console.log(`Server is listening on port ${port}...`);
+        })          
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+start()
+
