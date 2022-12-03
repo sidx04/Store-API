@@ -8,9 +8,13 @@ const jsonProducts=require('./products.json')
 const start=async()=>{
     try {
         await connectDB(process.env.MONGO_URI)
-        console.log('successfully connected db...');        
+        await Product.deleteMany();
+        await Product.create(jsonProducts)
+        console.log('successfully connected db...');
+        process.exit(0)        
     } catch (error) {
         console.log(error);
+        process.exit(1)
     }
 }
 
