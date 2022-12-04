@@ -6,7 +6,7 @@ const getAllProductsStatic=async(req,res)=>{
         name:{$regex:search,$options:'i'}
     })
     res.status(200).json({products, nbHits:products.length})
-    //throw new Error('testing async errors...')
+     //throw new Error('testing async errors...')
 }
 
 const getAllProducts=async(req,res)=>{
