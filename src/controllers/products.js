@@ -1,7 +1,10 @@
 const Product=require('../models/products')
 
 const getAllProductsStatic=async(req,res)=>{
-    const products=await Product.find({featured:true,})
+    const search='a'
+    const products=await Product.find({
+        name:{$regex:search,$options:'i'}
+    })
     res.status(200).json({products, nbHits:products.length})
     //throw new Error('testing async errors...')
 }
@@ -19,8 +22,12 @@ const getAllProducts=async(req,res)=>{
         queryObj.company=company
     }
 
+    /**
+     * ! use regex for non-strict filtering 
+     */
+
     if(name){
-        queryObj.name=name
+        queryObj.name={$regex:name,$options:'i'}
     }
 
     console.log(queryObj);
