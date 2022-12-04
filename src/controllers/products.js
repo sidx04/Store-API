@@ -82,6 +82,10 @@ const getAllProducts=async(req,res)=>{
         const selectList=select.split(',').join(' ')
         result=result.select(selectList) 
       }
+
+      /**
+       * ! Page limits
+       */
       
       const page=Number(req.query.page)||1
       const limit=Number(req.query.limit)||10
